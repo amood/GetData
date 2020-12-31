@@ -1,6 +1,7 @@
 # GetData(CLI)
 
-Python版本
+Python版本 3.8
+
 ![](https://img.shields.io/badge/Python-3.8-yellow.svg?style=flat&logo=python)
 
 ## 功能
