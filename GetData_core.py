@@ -55,7 +55,7 @@ def get_part(filepath) -> str:
             return re.findall(pattern, basename)[0]
     except:
         print("[-]failed!Please rename the filename again!")
-        return ''
+    return ''
 
 
 def getfilename(filepath, json_data, conf: config.Config) -> str:
