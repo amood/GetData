@@ -1,13 +1,13 @@
+import os
+
 from AV_Data_Capture import *
 from GetData_Config import GetDataConfig
 from GetData_core import *
-import os
-
 
 
 def renname_data(file_path: str, c: config.Config, debug):
     # Normalized number, eg: 111xxx-222.mp4 -> xxx-222.mp4
-    #n_number = get_number(debug, file_path)
+    # n_number = get_number(debug, file_path)
     n_number = get_number(debug, file_path)
 
     try:
@@ -36,7 +36,7 @@ def exectute():
     count = 0
     count_all = str(len(movie_list))
     print('[+]Find', count_all, 'movies')
-    if conf.debug() == True:
+    if conf.debug():
         print('[+]' + ' DEBUG MODE ON '.center(54, '-'))
     if conf.soft_link():
         print('[!] --- Soft link mode is ENABLE! ----')
@@ -57,5 +57,3 @@ def exectute():
 
 if __name__ == '__main__':
     exectute()
-
-
