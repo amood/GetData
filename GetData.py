@@ -10,18 +10,13 @@ def renname_data(file_path: str, c: config.Config, debug):
     #n_number = get_number(debug, file_path)
     n_number = get_number(debug, file_path)
 
-    if debug:
+    try:
         print("[!]Making Data for [{}], the number is [{}]".format(file_path, n_number))
         core_main_rename(file_path, n_number, c)
         print("[*]======================================================")
-    else:
-        try:
-            print("[!]Making Data for [{}], the number is [{}]".format(file_path, n_number))
-            core_main_rename(file_path, n_number, c)
-            print("[*]======================================================")
-        except Exception as err:
-            print("[-] [{}] ERROR:".format(file_path))
-            print('[-]', err)
+    except Exception as err:
+        print("[-] [{}] ERROR:".format(file_path))
+        print('[-]', err)
 
 
 def exectute():
@@ -35,8 +30,6 @@ def exectute():
     conf = GetDataConfig(path=config_file)
 
     os.chdir(os.getcwd())
-
-
 
     movie_list = movie_lists(conf.movie_folder(), re.split("[,，]", conf.escape_folder()))
 
