@@ -9,36 +9,15 @@ def getActor(jsondata):
     return jsondata
 
 
-def getlastserialvalue(oldfilename) -> str:
-    result = ''
-    # 处理含有-和_的数据
-    if '-' in oldfilename:
-        count = oldfilename.count('-')
-        result = oldfilename.split('-')[count]
-    if '_' in oldfilename:
-        count = oldfilename.count('_')
-        result = oldfilename.split('_')[count]
-
-    # 处理CD[数字]-[字母]情况
-    # pattern = r'CD\d+-\w+'
-    pattern = r'\w+-[a-zA-Z]'
-    matchobj = re.search(pattern, oldfilename, re.IGNORECASE)
-    if matchobj:
-        print(matchobj)
-
-    return result
-
-
 def get_part(filepath) -> str:
-
-    #去掉路径
+    # 去掉路径
     basename = os.path.basename(filepath)
 
     # 去掉扩展名
     basename = os.path.splitext(basename)[0]
 
     # 处理文件名中含有多个.的情况
-    basename  = re.sub('\.+', '', basename, re.IGNORECASE)
+    basename = re.sub('\.+', '', basename, re.IGNORECASE)
 
     try:
         # 处理-CD1
