@@ -51,12 +51,16 @@ def getfilename(filepath, json_data, conf: config.Config) -> str:
         length = 255 - len(extension)
         filename = filename[:length - 1]
 
+    # 英文字母转换为大写
+    filename = filename.upper()
+
     # 处理系列名称
     part = get_part(filepath)
     if len(part) == 0:
         filename = filename + extension
     else:
         filename = filename + part + extension
+
 
     return filename
 
