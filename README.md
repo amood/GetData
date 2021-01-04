@@ -10,7 +10,7 @@ Python版本 3.8
 
 ## 开发环境构建方法
 
-1.下载[AV Data Capture](https://github.com/yoshiko2/AV_Data_Capture/tree/4.2.2)（Ver 4.2.2）
+1.下载[AV Data Capture](https://github.com/yoshiko2/AV_Data_Capture/tree/4.3.1)（Ver 4.3.1） PS:刚刚适配完，发现有了新版本4.3.2，有空再适配
 
 2.解压AV Data Capture
 
