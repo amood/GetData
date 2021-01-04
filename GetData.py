@@ -1,6 +1,7 @@
 import os
+import sys
 
-from AV_Data_Capture import *
+from AV_Data_Capture import get_number, argparse_function
 from GetData_Config import GetDataConfig
 from GetData_core import *
 
@@ -19,8 +20,24 @@ def renname_data(file_path: str, c: config.Config, debug):
         print('[-]', err)
 
 
+def movie_lists(root, escape_folder, c: config.Config):
+    for folder in escape_folder:
+        if folder in root:
+            return []
+    total = []
+    file_type = c.media_type().upper()
+    dirs = os.listdir(root)
+    for entry in dirs:
+        f = os.path.join(root, entry)
+        if os.path.isdir(f):
+            total += movie_lists(f, escape_folder, c)
+        elif (len(os.path.splitext(f)[1].upper()) > 0) and (os.path.splitext(f)[1].upper() in file_type):
+            total.append(f)
+    return total
+
+
 def exectute():
-    version = '4.2.2'
+    version = '4.3.1'
 
     # Parse command line args
     single_file_path, config_file, custom_number, auto_exit = argparse_function(version)
@@ -31,16 +48,16 @@ def exectute():
 
     os.chdir(os.getcwd())
 
-    movie_list = movie_lists(conf.movie_folder(), re.split("[,，]", conf.escape_folder()))
+    movielist = movie_lists(conf.movie_folder(), re.split("[,，]", conf.escape_folder()), conf)
 
     count = 0
-    count_all = str(len(movie_list))
+    count_all = str(len(movielist))
     print('[+]Find', count_all, 'movies')
     if conf.debug():
         print('[+]' + ' DEBUG MODE ON '.center(54, '-'))
     if conf.soft_link():
         print('[!] --- Soft link mode is ENABLE! ----')
-    for movie_file in movie_list:  # 遍历电影列表 交给core处理
+    for movie_file in movielist:  # 遍历电影列表 交给core处理
         count = count + 1
         percentage = str(count / int(count_all) * 100)[:4] + '%'
         print('[!] - ' + percentage + ' [' + str(count) + '/' + count_all + '] -')

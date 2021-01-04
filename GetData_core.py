@@ -17,7 +17,7 @@ def get_part(filepath) -> str:
     basename = os.path.splitext(basename)[0]
 
     # 处理文件名中含有多个.的情况
-    basename = re.sub('\.+', '', basename, re.IGNORECASE)
+    basename = re.sub(r'\.+', '', basename, re.IGNORECASE)
 
     try:
         # 处理-CD1
@@ -60,7 +60,6 @@ def getfilename(filepath, json_data, conf: config.Config) -> str:
         filename = filename + extension
     else:
         filename = filename + part + extension
-
 
     return filename
 
@@ -128,13 +127,14 @@ def get_data_from_json(file_number, filepath, conf: config.Config):  # 从JSON�
     # Return if data not found in all sources
     if not json_data:
         print('[-]Movie Data not found!')
-        # moveFailedFolder(filepath, conf.failed_folder()) 注释掉的内容
+        # moveFailedFolder(filepath, conf.failed_folder())
         return
 
     # ================================================网站规则添加结束================================================
 
     title = json_data.get('title')
     actor_list = str(json_data.get('actor')).strip("[ ]").replace("'", '').split(',')  # 字符串转列表
+    actor_list = [actor.strip() for actor in actor_list]  # 去除空白
     release = json_data.get('release')
     number = json_data.get('number')
     studio = json_data.get('studio')
@@ -150,13 +150,23 @@ def get_data_from_json(file_number, filepath, conf: config.Config):  # 从JSON�
     else:
         cover_small = json_data.get('cover_small')
 
+    if json_data.get('trailer') == None:
+        trailer = ''
+    else:
+        trailer = json_data.get('trailer')
+
+    if json_data.get('extrafanart') == None:
+        extrafanart = ''
+    else:
+        extrafanart = json_data.get('extrafanart')
+
     imagecut = json_data.get('imagecut')
     tag = str(json_data.get('tag')).strip("[ ]").replace("'", '').replace(" ", '').split(',')  # 字符串转列表 @
     actor = str(actor_list).strip("[ ]").replace("'", '').replace(" ", '')
 
     if title == '' or number == '':
         print('[-]Movie Data not found!')
-        #moveFailedFolder(filepath, conf.failed_folder()) 注释掉的内容
+        # moveFailedFolder(filepath, conf.failed_folder())
         return
 
     # if imagecut == '3':
@@ -239,6 +249,23 @@ def get_data_from_json(file_number, filepath, conf: config.Config):  # 从JSON�
         translate_values = conf.transalte_values().split(",")
         for translate_value in translate_values:
             json_data[translate_value] = translate(json_data[translate_value])
+
+    if conf.is_trailer():
+        if trailer:
+            json_data['trailer'] = trailer
+        else:
+            json_data['trailer'] = ''
+    else:
+        json_data['trailer'] = ''
+
+    if conf.is_extrafanart():
+        if extrafanart:
+            json_data['extrafanart'] = extrafanart
+        else:
+            json_data['extrafanart'] = ''
+    else:
+        json_data['extrafanart'] = ''
+
     naming_rule = ""
     for i in conf.naming_rule().split("+"):
         if i not in json_data:
