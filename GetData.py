@@ -37,7 +37,7 @@ def movie_lists(root, escape_folder, c: config.Config):
 
 
 def exectute():
-    version = '4.3.1'
+    version = '4.3.2'
 
     # Parse command line args
     single_file_path, config_file, custom_number, auto_exit = argparse_function(version)
