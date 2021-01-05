@@ -10,11 +10,11 @@ Python版本 3.8
 
 ## 开发环境构建方法
 
-1.下载[AV Data Capture](https://github.com/yoshiko2/AV_Data_Capture/tree/4.3.1)（Ver 4.3.1） PS:刚刚适配完，发现有了新版本4.3.2，有空再适配
+1.下载[AV Data Capture 4.3.2](https://github.com/yoshiko2/AV_Data_Capture/tree/4.3.2)
 
 2.解压AV Data Capture
 
-3.将专属文件清单中的文件放入AV_Data_Capture.py同级路径下
+3.将专属文件清单[^1]中的文件放入AV_Data_Capture.py同级路径下
 
 4.修改config.ini文件，在[common]节中增加movie_folder=XX路径
 
@@ -26,6 +26,7 @@ Python版本 3.8
 
 ## 专属文件清单
 
+[^1]:专属文件清单
 
 以GetData开头的所有文件，清单如下：
 
