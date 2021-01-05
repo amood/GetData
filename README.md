@@ -14,7 +14,7 @@ Python版本 3.8
 
 2.解压AV Data Capture
 
-3.将[专属文件清单][1]中的文件放入AV_Data_Capture.py同级路径下
+3.将专属文件清单中的文件放入AV_Data_Capture.py同级路径下
 
 4.修改config.ini文件，在[common]节中增加movie_folder=XX路径
 
@@ -24,7 +24,7 @@ Python版本 3.8
 执行GetData.ps1后，从dist目录中获得GetData.exe，与config.ini文件放到相同路径下执行即可
 
 
-## [1]:专属文件清单
+## 专属文件清单
 
 
 以GetData开头的所有文件，清单如下：
