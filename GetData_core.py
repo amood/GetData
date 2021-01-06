@@ -1,11 +1,15 @@
 from core import *
 
 
-def getActor(jsondata):
+def getStr(jsondata):
     if (jsondata is None) or (len(jsondata.strip()) == 0):
         return 'UNKONWN'
     if ',' or ',  ' in jsondata:
         jsondata = jsondata.replace(',', ' ').replace(',  ', ' ')
+    r = '[’!"#$%&\'()*+,./:;<=>?@[\\]^`{|}~\n。！，…]+'
+
+    jsondata = re.sub(r, '', jsondata, re.IGNORECASE)
+
     return jsondata
 
 
@@ -38,7 +42,7 @@ def get_part(filepath) -> str:
 
 
 def getfilename(filepath, json_data, conf: config.Config) -> str:
-    filename = json_data['number'] + '-' + getActor(json_data['actor']) + '-' + json_data['title']
+    filename = json_data['number'] + '-' + getStr(json_data['actor']) + '-' + getStr(json_data['title'])
 
     # if len(serialvalue.strip()) > 0:
     #     filename += '-' + serialvalue
