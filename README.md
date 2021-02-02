@@ -38,6 +38,8 @@ GetData_Config.py
 
 GetData_core.py
 
+WebCrawler\javdb7.py
+
 ## 原始文件
 
 config.ini(修改) 增加了movie_folder属性
