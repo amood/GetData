@@ -16,7 +16,7 @@ Python版本 3.8
 
 3.将专属文件清单[^1]中的文件放入AV_Data_Capture.py同级路径下
 
-4.修改config.ini文件，在[common]节中增加movie_folder=XX路径
+4.修改config.ini文件，在[common]节中增加movie_folder=XX路径，在[priority]节中website属性中增加javdb7,例如：website = javdb7,javbus,jav321,airav,javdb,fanza,xcity,mgstage,fc2,avsox,javlib,dlsite
 
 5.执行GetData.py即可
 
