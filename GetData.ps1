@@ -6,11 +6,13 @@ $CLOUDSCRAPER_PATH=$(python -c 'import cloudscraper as _; print(_.__path__[0])' 
 mkdir build 
 mkdir __pycache__
 
+rmdir -Recurse -Force dist
+
 pyinstaller --onefile GetData.py `
     --hidden-import ADC_function.py `
     --hidden-import core.py `
     --add-data "$CLOUDSCRAPER_PATH;cloudscraper"
-
+Copy-Item .\config.ini dist\
 rmdir -Recurse -Force build
 rmdir -Recurse -Force __pycache__
 rmdir -Recurse -Force GetData.spec
