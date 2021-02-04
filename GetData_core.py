@@ -1,3 +1,4 @@
+from WebCrawler import javdb7
 from core import *
 
 
@@ -24,6 +25,7 @@ def get_part(filepath) -> str:
     basename = re.sub(r'\.+', '', basename, re.IGNORECASE)
 
     try:
+
         # 处理-CD1
         pattern = r'-CD\d+'
         if re.search(pattern, basename):
@@ -32,10 +34,19 @@ def get_part(filepath) -> str:
         pattern = r'-cd\d+'
         if re.search(pattern, basename):
             return re.findall(pattern, basename)[0]
+
         # 处理-A
         pattern = r'-[a-zA-Z]$'
         if re.search(pattern, basename):
             return re.findall(pattern, basename)[0]
+
+        # 处理-1
+        pattern = r'-\d$'
+        if re.search(pattern, basename):
+            return re.findall(pattern, basename)[0]
+
+
+
     except:
         print("[-]failed!Please rename the filename again!")
     return ''
@@ -85,6 +96,7 @@ def get_data_from_json(file_number, filepath, conf: config.Config):  # 从JSON�
         "xcity": xcity.main,
         "javlib": javlib.main,
         "dlsite": dlsite.main,
+        "javdb7": javdb7.main,
     }
 
     # default fetch order list, from the beginning to the end
