@@ -34,7 +34,8 @@ def getaphoto(url):
     img_prether = re.compile(r'<span class\=\"avatar\" style\=\"background\-image\: url\((.*?)\)')
     img_url = img_prether.findall(html_page)
     if img_prether:
-        return img_url[0]
+        if len(img_url) > 0: #增加判断，有可能找不到头像
+            return img_url[0]
     else:
         return ''
 
@@ -42,7 +43,6 @@ def getaphoto(url):
 def getActorPhoto(html):  # //*[@id="star_qdt"]/li/a/img
     actorall_prether = re.compile(r'<strong>演員\:</strong>\s*?.*?<span class=\"value\">(.*)\s*?</div>')
     actorall = actorall_prether.findall(html)
-
     if actorall:
         actoralls = actorall[0]
         actor_prether = re.compile(r'<a href\=\"(.*?)\">(.*?)</a>')
